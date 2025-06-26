@@ -3,8 +3,6 @@ VIAL_ENABLE = yes
 
 VIALRGB_ENABLE = yes
 
-CONVERT_TO=rp2040_ce
-
 ifeq ($(strip $(CONVERT_TO)), )
     QMK_SETTINGS = no
     COMBO_ENABLE = no
