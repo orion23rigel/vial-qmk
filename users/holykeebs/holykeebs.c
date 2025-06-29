@@ -645,6 +645,31 @@ void housekeeping_task_user(void) {
 #endif
 }
 
+#define TAP_TAPPING_TERM 260
+
+void install_tap_dance_entries(void) {
+    vial_tap_dance_entry_t td0 = { KC_ESC, // Change layers
+                                   KC_ESC,
+                                   TO(0),
+                                   TO(0),
+                                   TAP_TAPPING_TERM };
+    vial_tap_dance_entry_t td1 = { KC_SLSH, // / [ ? ]
+                                   KC_LBRC,
+                                   LSFT(KC_SLSH),
+                                   KC_RBRC,
+                                   TAP_TAPPING_TERM };
+    dynamic_keymap_set_tap_dance(0, &td0); // the first value corresponds to the TD(i) slot
+    dynamic_keymap_set_tap_dance(1, &td1);
+// #ifdef POINTING_DEVICE_ENABLE
+//    vial_tap_dance_entry_t td2 = { DPI_RST, // POINTER_DEFAULT_DPI_RESET
+//                                    DPI_RMOD, // POINTER_DEFAULT_DPI_REVERSE
+//                                    DPI_MOD, // POINTER_DEFAULT_DPI_FORWARD
+//                                    DPI_RST, // POINTER_DEFAULT_DPI_RESET
+//                                    TAP_TAPPING_TERM };
+//     dynamic_keymap_set_tap_dance(2, &td2);
+// #endif
+}
+
 void keyboard_post_init_user(void) {
     if (!is_keyboard_master()) {
         #ifdef HK_SPLIT_SYNC_STATE
@@ -668,6 +693,8 @@ void keyboard_post_init_user(void) {
     }
 
     keyboard_post_init_keymap();
+	
+	install_tap_dance_entries();
 }
 
 __attribute__((weak)) void eeconfig_init_keymap(void) {}

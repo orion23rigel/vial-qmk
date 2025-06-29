@@ -12,7 +12,7 @@
   },
   "split": {
     "serial": {
-      "pin": "GP1"
+//      "pin": "GP1"
 	  "driver": "vendor"
     }
   },

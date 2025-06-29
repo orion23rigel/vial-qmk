@@ -1,14 +1,24 @@
-// Copyright 2022 Cole Smith <cole@boadsource.xyz>
-// SPDX-License-Identifier: GPL-2.0-or-later
+ /* Copyright 2020 Naoki Katahira
+  *
+  * This program is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 2 of the License, or
+  * (at your option) any later version.
+  *
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
 
 #include QMK_KEYBOARD_H
-
-// Holykeebs includes for trackpad support
 #include <stdio.h>
 #include "users/holykeebs/holykeebs.h"
 
 #define QK_C_EEPROM QK_CLEAR_EEPROM
-
 
 //extern uint8_t is_master;
 
@@ -17,6 +27,17 @@ enum layer_number {
   _KEYPAD_ARROWS,
   _ARROWS_KEYPAD,
   _MOUSE,
+};
+
+// Tap Dance declarations
+enum {
+    TD_ESC_L0,
+};
+
+// Tap Dance definitions
+tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Escape, twice for Caps Lock
+    [TD_ESC_L0] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, TO(0)),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -37,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
  [_HOME] = LAYOUT(
-  TD(0),   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+  TD(TD_ESC_L0),   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
   LALT(KC_RGHT), LCTL_T(KC_A), LGUI_T(KC_S), LALT_T(KC_D), LSFT_T(KC_F),    KC_G,                     KC_H,    RSFT_T(KC_J), RALT_T(KC_K), RGUI_T(KC_L), RCTL_T(KC_SCLN), KC_QUOT,
   LALT(KC_LEFT), KC_Z, LT(_KEYPAD_ARROWS,KC_X), LT(_ARROWS_KEYPAD,KC_C), LT(_MOUSE,KC_V),    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    LT(_MOUSE,KC_M), LT(_ARROWS_KEYPAD,KC_COMM), LT(_KEYPAD_ARROWS,KC_DOT), KC_SLSH, RALT(KC_LEFT),
@@ -102,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
   [_MOUSE] = LAYOUT(
-    TD(0),      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    TD(TD_ESC_L0),      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     QK_BOOT,      HK_DUMP,    HK_SAVE,    HK_RESET,     XXXXXXX, HK_C_SCROLL,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
     QK_C_EEPROM,  HK_P_SET_D, HK_P_SET_S, HK_P_SET_BUF, XXXXXXX, HK_S_MODE_T,                    KC_UP,   KC_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, QK_C_EEPROM,
     KC_LSFT,      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX, HK_D_MODE_T, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
