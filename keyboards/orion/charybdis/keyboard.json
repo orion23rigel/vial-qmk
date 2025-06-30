@@ -1,13 +1,51 @@
 {
     "manufacturer": "Orion",
-    "url": "https://bastardkb.com/charybdis",
+	"keyboard_name": "Charybdis",
+    "url": "https://bastardkb.com",
     "usb": {
-        "pid": "0x1833",
+        "device_version": "2.0.0",
+		"pid": "0x1833",
         "vid": "0xA8F8"
     },
-    "rgb_matrix": {
-        "split_count": [29, 29]
+    "features": {
+        "bootmagic": true,
+        "mousekey": false,
+        "extrakey": true,
+        "rgb_matrix": true,
+        "pointing_device": true
     },
+    "rgb_matrix": {
+        "driver": "ws2812",
+		"split_count": [29, 29],
+        "animations": {
+            "cycle_left_right": true
+        },
+        "default": {
+            "speed": 32,
+            "val": 64
+        },
+        "sleep": true
+    },
+    "matrix_pins": {
+        "cols": ["GP27", "GP28", "GP21", "GP6", "GP7", "GP8"],
+        "rows": ["GP29", "GP26", "GP5", "GP4", "GP9"]
+    },
+    "diode_direction": "ROW2COL",
+    "split": {
+        "enabled": true,
+        "soft_serial_pin": "GP1",
+		"transport": {
+            "sync": {
+                "matrix_state": true
+            }
+        }
+    },
+    "ws2812": {
+        "pin": "GP0",
+        "driver": "vendor"
+    },
+    "processor": "RP2040",
+    "bootloader": "rp2040",
     "layout_aliases": {
         "LAYOUT_charybdis_4x6": "LAYOUT"
     },
