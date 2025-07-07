@@ -506,21 +506,19 @@ void install_tap_dance_entries(void) {
                                    TO(0),
                                    TO(0),
                                    TAP_TAPPING_TERM };
-    vial_tap_dance_entry_t td1 = { KC_SLSH, // / [ ? ]
-                                   KC_LBRC,
-                                   LSFT(KC_SLSH),
-                                   KC_RBRC,
+    vial_tap_dance_entry_t td1 = { LSFT(KC_TILD),
+                                   LSFT(KC_TILD),
+                                   TO(0),
+                                   TO(0),
+                                   TAP_TAPPING_TERM };
+	vial_tap_dance_entry_t td2 = { KC_F12,
+								   KC_F12,
+								   TO(0),
+                                   TO(0),
                                    TAP_TAPPING_TERM };
     dynamic_keymap_set_tap_dance(0, &td0); // the first value corresponds to the TD(i) slot
     dynamic_keymap_set_tap_dance(1, &td1);
-// #ifdef POINTING_DEVICE_ENABLE
-//    vial_tap_dance_entry_t td2 = { DPI_RST, // POINTER_DEFAULT_DPI_RESET
-//                                    DPI_RMOD, // POINTER_DEFAULT_DPI_REVERSE
-//                                    DPI_MOD, // POINTER_DEFAULT_DPI_FORWARD
-//                                    DPI_RST, // POINTER_DEFAULT_DPI_RESET
-//                                    TAP_TAPPING_TERM };
-//     dynamic_keymap_set_tap_dance(2, &td2);
-// #endif
+    dynamic_keymap_set_tap_dance(2, &td2);
 }
 
 void keyboard_post_init_user(void) {
